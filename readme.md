@@ -14,3 +14,8 @@ Just getting started. Added empty solution and this readme.
 
 Add a new ASP.NET Core API Project.
 
+Add following dependencies
+
+- Microsoft.Orleans.Client
+- Microsoft.Orleans.CodeGenerator.MSBuild
+- Microsoft.Orleans.Server

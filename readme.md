@@ -19,3 +19,6 @@ Add following dependencies
 - Microsoft.Orleans.Client
 - Microsoft.Orleans.CodeGenerator.MSBuild
 - Microsoft.Orleans.Server
+
+
+Update Program.cs and setup orleans. For now we will use localhost clustering.

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Orleans.Hosting;
 
 namespace Api
 {
@@ -15,6 +16,10 @@ namespace Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .UseOrleans(siloBuilder =>
+                {
+                    siloBuilder.UseLocalhostClustering();
                 });
     }
 }

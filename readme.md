@@ -22,4 +22,7 @@ Add following dependencies
 
 Update Program.cs and setup orleans. For now we will use localhost clustering.
 
-Add a new project (.Net standard class library). 
+Add a new project (.Net standard class library). Add Grain interface with Guid as key. We also need to add following dependencies
+
+- Microsoft.Orleans.Core.Abstractions
+- Microsoft.Orleans.CodeGenerator.MSBuild

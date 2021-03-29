@@ -4,6 +4,7 @@
   - [Add Api Project](#add-api-project)
   - [Add Project for Grain Interfaces](#add-project-for-grain-interfaces)
   - [Add Project for Grain Implementations](#add-project-for-grain-implementations)
+  - [Invoke Grain](#invoke-grain)
 - [References](#references)
 
 ## Orleans Kitchen Sink
@@ -43,6 +44,11 @@ Add a new .net standard project. Add a new class and implement interface we adde
 - Microsoft.Orleans.CodeGenerator.MSBuild
 - Microsoft.Orleans.Core
 
+### Invoke Grain
+
+Add reference to both `GrainInterfaces` and `Grains` project in `API` project.
+
+Update controller to get reference to grain and call `SayHello` method. Had to update order of how orleans was being configured in `Program.cs`. Configuring Orleans after `ConfigureWebHostDefaults` was throwing `InvalidSchedulingContextException`
 
 ## References
 

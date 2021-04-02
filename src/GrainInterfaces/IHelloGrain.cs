@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GrainInterfaces
 {
     public interface IHelloGrain : Orleans.IGrainWithGuidKey
     {
-        Task<string> SayHello();
+        Task<List<string>> GetAllGreetings();
+        Task<string> SayHello(string from);
     }
 }

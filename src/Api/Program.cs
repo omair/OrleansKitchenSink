@@ -15,7 +15,9 @@ namespace Api
             Host.CreateDefaultBuilder(args)
                 .UseOrleans(siloBuilder =>
                 {
-                    siloBuilder.UseLocalhostClustering();
+                    siloBuilder
+                        .UseLocalhostClustering()
+                        .AddMemoryGrainStorage(name: "HelloGrainStorage");
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

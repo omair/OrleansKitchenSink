@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Orleans.Hosting;
+using Serilog;
 
 namespace Api
 {
@@ -13,7 +15,13 @@ namespace Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseOrleans(siloBuilder =>
+                .ConfigureLogging((hostConfiguration, loggingBuilder) =>
+                {
+                    loggingBuilder.ClearProviders();
+                    var loggerConfiguration = new LoggerConfiguration().ReadFrom.Configuration(hostConfiguration.Configuration);
+                    var logger = loggerConfiguration.CreateLogger();
+                    loggingBuilder.AddSerilog(logger);
+                }).UseOrleans(siloBuilder =>
                 {
                     siloBuilder
                         .UseLocalhostClustering()
@@ -24,5 +32,6 @@ namespace Api
                     webBuilder.UseStartup<Startup>();
                 })
 ;
+
     }
 }

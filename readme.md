@@ -8,6 +8,7 @@
 - [Step 2 (Add State)](#step-2-add-state)
   - [Add State to Grain](#add-state-to-grain)
   - [Update Silo and configure Storage.](#update-silo-and-configure-storage)
+- [Step 3 (Upgrade to .Net 5)](#step-3-upgrade-to-net-5)
 - [References](#references)
 
 ## Orleans Kitchen Sink
@@ -69,6 +70,10 @@ Update Grain class to inject `[PersistentState("greetingStore","HelloGrainStorag
 
 Update `Program.cs` and configure storage provider. To begin with we will use in-memory storage.
 
+
+## Step 3 (Upgrade to .Net 5)
+
+Upgrade to .Net 5 and use [Serilog](https://serilog.net/) for logging.
 
 ## References
 

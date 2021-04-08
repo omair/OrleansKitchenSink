@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Orleans.Runtime;
 using System.Collections.Generic;
 
-namespace Grains
+namespace GrainTests
 {
     public class HelloGrain : Orleans.Grain, IHelloGrain
     {

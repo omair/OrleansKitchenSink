@@ -9,6 +9,9 @@
   - [Add State to Grain](#add-state-to-grain)
   - [Update Silo and configure Storage.](#update-silo-and-configure-storage)
 - [Step 3 (Upgrade to .Net 5)](#step-3-upgrade-to-net-5)
+- [Step 4](#step-4)
+  - [Integration Tests](#integration-tests)
+  - [Unit Tests](#unit-tests)
 - [References](#references)
 
 ## Orleans Kitchen Sink
@@ -75,8 +78,21 @@ Update `Program.cs` and configure storage provider. To begin with we will use in
 
 Upgrade to .Net 5 and use [Serilog](https://serilog.net/) for logging.
 
+## Step 4
+
+Added unit and integration tests.
+
+### Integration Tests
+
+Integration tests added for both [Orleans](https://dotnet.github.io/orleans/docs/tutorials_and_samples/testing.html) and [API](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-5.0)
+
+### Unit Tests
+Unit tests added for Grains. Used [OrleansTestKit](https://github.com/OrleansContrib/OrleansTestKit) for adding Orleans unit tests.
+
 ## References
 
 - [AspNetCore Cohosting](https://github.com/dotnet/orleans/tree/main/Samples/3.0/AspNetCoreCohosting)
 - [What is Microsoft Orleans - Code With Stu](https://www.youtube.com/watch?v=yM-gpuw1uhM)
 - [Grain Persistence](https://dotnet.github.io/orleans/docs/grains/grain_persistence/index.html)
+- [Testing Orleans](https://dotnet.github.io/orleans/docs/tutorials_and_samples/testing.html)
+- [Testing Example](https://github.com/dotnet/orleans/blob/main/Samples/2.3/UnitTesting/test/Grains.Tests/Hosted/Cluster/ClusterFixture.cs)

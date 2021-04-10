@@ -5,11 +5,11 @@ using Shouldly;
 
 namespace ApiTests
 {
-    public class OrealnsContollerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class HelloContollerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
-        public OrealnsContollerTests(WebApplicationFactory<Startup> factory)
+        public HelloContollerTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
@@ -18,7 +18,7 @@ namespace ApiTests
         [Fact]
         public async System.Threading.Tasks.Task Get_Should_Return_All_GreetingsAsync()
         {
-            var url = "/orleans";
+            var url = "/hello";
             var client = _factory.CreateClient();
             var response = await client.GetAsync(url);
             response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);

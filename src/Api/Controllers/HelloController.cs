@@ -10,11 +10,11 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrleansController : ControllerBase
+    public class HelloController : ControllerBase
     {
         private readonly IGrainFactory _grainFactory;
 
-        public OrleansController(IGrainFactory grainFactory)
+        public HelloController(IGrainFactory grainFactory)
         {
             _grainFactory = grainFactory;
         }

@@ -25,7 +25,10 @@ namespace Api
                 {
                     siloBuilder
                         .UseLocalhostClustering()
-                        .AddMemoryGrainStorage(name: "HelloGrainStorage");
+                        .AddMemoryGrainStorage(name: "HelloGrainStorage")
+                        .AddMemoryGrainStorage(name: "DeviceGrainStorage")
+                        .AddLogStorageBasedLogConsistencyProvider("LogStorage");
+
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

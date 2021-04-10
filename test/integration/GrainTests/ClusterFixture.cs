@@ -21,8 +21,10 @@ namespace GrainTests
             public void Configure(ISiloBuilder siloBuilder)
             {
                 siloBuilder
-                    .AddMemoryGrainStorageAsDefault()
-                    .AddMemoryGrainStorage(name: "HelloGrainStorage");
+                    //.AddMemoryGrainStorageAsDefault()
+                    .AddMemoryGrainStorage(name: "HelloGrainStorage")
+                    .AddMemoryGrainStorage(name: "DeviceGrainStorage")
+                    .AddLogStorageBasedLogConsistencyProvider("LogStorage");
 
             }
         }

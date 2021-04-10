@@ -9,9 +9,10 @@
   - [Add State to Grain](#add-state-to-grain)
   - [Update Silo and configure Storage.](#update-silo-and-configure-storage)
 - [Step 3 (Upgrade to .Net 5)](#step-3-upgrade-to-net-5)
-- [Step 4](#step-4)
+- [Step 4 (Add Unit and Integration tests)](#step-4-add-unit-and-integration-tests)
   - [Integration Tests](#integration-tests)
   - [Unit Tests](#unit-tests)
+- [Step 5 (Add Journaled Grain)](#step-5-add-journaled-grain)
 - [References](#references)
 
 ## Orleans Kitchen Sink
@@ -78,7 +79,7 @@ Update `Program.cs` and configure storage provider. To begin with we will use in
 
 Upgrade to .Net 5 and use [Serilog](https://serilog.net/) for logging.
 
-## Step 4
+## Step 4 (Add Unit and Integration tests)
 
 Added unit and integration tests.
 
@@ -89,6 +90,20 @@ Integration tests added for both [Orleans](https://dotnet.github.io/orleans/docs
 ### Unit Tests
 Unit tests added for Grains. Used [OrleansTestKit](https://github.com/OrleansContrib/OrleansTestKit) for adding Orleans unit tests.
 
+
+## Step 5 (Add Journaled Grain)
+
+Added one grain that uses EventSourcing (JournaledGrain in orleans). Added relevant integration tests. Looks like Unit Tests for Journaled Grains are not supported. Every thing is using in memory storage for now.
+
+JournaledGrains on receiving a message raise an event. Grain can decide not to raise event (e.g. if message fails validation). Events are then handled in State and result in state change. In our example Ping raises a PingEvent which results in few changes in State. If Ping received is older then last received ping then it is ignored and no event is raised. 
+
+One of the changes PingEvent does is to change Device state to Online. There is no Event to change Device state back to Offline. [Orleans Reminder](https://dotnet.github.io/orleans/docs/grains/timers_and_reminders.html) looks like a good way to handle this.
+
+
+
+Few other minor changes (e.g. renamed OrleansController to HelloController)
+
+
 ## References
 
 - [AspNetCore Cohosting](https://github.com/dotnet/orleans/tree/main/Samples/3.0/AspNetCoreCohosting)
@@ -96,3 +111,4 @@ Unit tests added for Grains. Used [OrleansTestKit](https://github.com/OrleansCon
 - [Grain Persistence](https://dotnet.github.io/orleans/docs/grains/grain_persistence/index.html)
 - [Testing Orleans](https://dotnet.github.io/orleans/docs/tutorials_and_samples/testing.html)
 - [Testing Example](https://github.com/dotnet/orleans/blob/main/Samples/2.3/UnitTesting/test/Grains.Tests/Hosted/Cluster/ClusterFixture.cs)
+- [Ignite Demo by Shengjie Yan](https://github.com/sheng-jie/Ignite2019.IoT.Orleans)

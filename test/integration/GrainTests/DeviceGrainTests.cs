@@ -1,5 +1,5 @@
 ﻿using GrainInterfaces;
-using GrainTests;
+using Grains.IntegrationTests.Cluster;
 using Orleans.TestingHost;
 using Shouldly;
 using System;
@@ -12,9 +12,12 @@ namespace Grains.IntegrationTests
     public class DeviceGrainTests
     {
         private readonly TestCluster _cluster;
+        private readonly ClusterFixture _fixture;
+
         public DeviceGrainTests(ClusterFixture fixture)
         {
             _cluster = fixture.Cluster;
+            _fixture = fixture;
         }
 
         [Fact]
@@ -56,7 +59,7 @@ namespace Grains.IntegrationTests
         public async Task Status_Should_Be_Offline_When_No_Ping_Is_Sent()
         {
             var grain = _cluster.GrainFactory.GetGrain<IDeviceGrain>(Guid.NewGuid().ToString());
-            (await grain.Status()).ShouldBe("Offline");
+            (await grain.Status()).ShouldBe(DeviceStatus.Offline);
         }
 
         [Fact]
@@ -64,9 +67,20 @@ namespace Grains.IntegrationTests
         {
             var grain = _cluster.GrainFactory.GetGrain<IDeviceGrain>(Guid.NewGuid().ToString());
             var pingTime = DateTime.Now;
-            (await grain.Status()).ShouldBe("Offline");
+            (await grain.Status()).ShouldBe(DeviceStatus.Offline);
             await grain.Ping(pingTime);
-            (await grain.Status()).ShouldBe("Online");
+            (await grain.Status()).ShouldBe(DeviceStatus.Online);
+        }
+
+        [Fact]
+        public async Task Reminder_Should_Not_Be_NullAsync()
+        {
+            var grain = _cluster.GrainFactory.GetGrain<IDeviceGrain>(Guid.NewGuid().ToString());
+            var reminder = _fixture.GetReminder(grain, ("UpdateDeviceStatusAsync"));
+            reminder.ShouldBeNull();
+            await grain.Ping(DateTime.Now);
+            reminder = _fixture.GetReminder(grain, ("UpdateDeviceStatusAsync"));
+            reminder.ShouldNotBeNull();
         }
 
     }

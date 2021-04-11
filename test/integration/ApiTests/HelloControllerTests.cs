@@ -1,9 +1,8 @@
-using Api;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
 using Shouldly;
+using Xunit;
 
-namespace ApiTests
+namespace Api.IntegrationTests
 {
     public class HelloContollerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -14,7 +13,7 @@ namespace ApiTests
             _factory = factory;
         }
 
-        
+
         [Fact]
         public async System.Threading.Tasks.Task Get_Should_Return_All_GreetingsAsync()
         {

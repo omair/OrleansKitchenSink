@@ -1,11 +1,12 @@
 ﻿using GrainInterfaces;
+using Grains.IntegrationTests.Cluster;
 using Orleans.TestingHost;
+using Shouldly;
 using System;
 using System.Threading.Tasks;
 using Xunit;
-using Shouldly;
 
-namespace GrainTests
+namespace Grains.IntegrationTests
 {
     [Collection(ClusterCollection.Name)]
     public class HelloGrainTests

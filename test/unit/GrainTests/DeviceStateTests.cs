@@ -1,4 +1,5 @@
-﻿using Grains;
+﻿using GrainInterfaces;
+using Grains;
 using Shouldly;
 using System;
 using Xunit;
@@ -26,7 +27,7 @@ namespace Grain.UnitTests
         public void IsOnline_Should_Be_False_When_New_State_Is_Created()
         {
             var s = new DeviceState();
-            s.IsOnline.ShouldBe(false);
+            s.Status.ShouldBe(GrainInterfaces.DeviceStatus.Offline);
         }
 
 
@@ -35,7 +36,7 @@ namespace Grain.UnitTests
         {
             var s = new DeviceState();
             var pingTime = DateTime.Now;
-            
+
             s.Apply(new PingEvent(pingTime));
             s.PingCount.ShouldBe(1);
 
@@ -76,9 +77,35 @@ namespace Grain.UnitTests
             var pingTime = DateTime.Now;
 
             s.Apply(new PingEvent(pingTime));
-            s.IsOnline.ShouldBe(true);
+            s.Status.ShouldBe(DeviceStatus.Online);
 
         }
+
+        [Fact]
+        public void IdleEvent_Should_Change_Online_Status_To_Idle()
+        {
+            var s = new DeviceState();
+            var pingTime = DateTime.Now;
+            s.Status.ShouldBe(DeviceStatus.Offline);
+
+            s.Apply(new DeviceIdleEvent(pingTime));
+            s.Status.ShouldBe(DeviceStatus.Idle);
+
+        }
+
+        [Fact]
+        public void Offline_Should_Change_Online_Status_To_Offline()
+        {
+            var s = new DeviceState();
+            var pingTime = DateTime.Now;
+
+            s.Apply(new DeviceIdleEvent(pingTime));
+            s.Status.ShouldBe(DeviceStatus.Idle);
+
+            s.Apply(new DeviceOfflineEvent(pingTime));
+            s.Status.ShouldBe(DeviceStatus.Offline);
+        }
+
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using GrainInterfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Orleans;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,8 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<string>> Get() {
+        public async Task<List<string>> Get()
+        {
             var grainId = Guid.Parse("691c5425-a6b2-4937-81de-2162233e78db");
             var client = _grainFactory.GetGrain<IHelloGrain>(grainId);
             _ = await client.SayHello($"{Guid.NewGuid()}");

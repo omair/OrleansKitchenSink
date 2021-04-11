@@ -1,14 +1,14 @@
-using GrainTests;
+using Grains;
+using Moq;
+using Orleans.Runtime;
 using Orleans.TestKit;
+using Shouldly;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
-using Shouldly;
-using Orleans.Runtime;
-using Moq;
-using System.Reflection;
 
-namespace GrainTests
+namespace Grain.UnitTests
 {
     public class HelloGrainTests : TestKitBase
     {

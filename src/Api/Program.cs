@@ -27,7 +27,8 @@ namespace Api
                         .UseLocalhostClustering()
                         .AddMemoryGrainStorage(name: "HelloGrainStorage")
                         .AddMemoryGrainStorage(name: "DeviceGrainStorage")
-                        .AddLogStorageBasedLogConsistencyProvider("LogStorage");
+                        .AddLogStorageBasedLogConsistencyProvider("LogStorage")
+                        .UseInMemoryReminderService();
 
                 })
                 .ConfigureWebHostDefaults(webBuilder =>

@@ -19,7 +19,8 @@ namespace Api.Controllers
         }
 
         [HttpGet("{deviceId}/ping")]
-        public Task<long> Ping(string deviceId) {
+        public Task<long> Ping(string deviceId)
+        {
             var client = _grainFactory.GetGrain<IDeviceGrain>(deviceId);
             return client.Ping(DateTime.UtcNow);
         }
@@ -33,10 +34,11 @@ namespace Api.Controllers
 
 
         [HttpGet("{deviceId}/status")]
-        public Task<string> Status(string deviceId)
+        public async Task<string> Status(string deviceId)
         {
             var client = _grainFactory.GetGrain<IDeviceGrain>(deviceId);
-            return client.Status();
+            var status = await client.Status();
+            return status.ToString();
         }
 
     }

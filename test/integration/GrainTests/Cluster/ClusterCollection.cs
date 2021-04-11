@@ -1,8 +1,8 @@
 ﻿using Xunit;
 
-namespace GrainTests
+namespace Grains.IntegrationTests.Cluster
 {
-    [CollectionDefinition(ClusterCollection.Name)]
+    [CollectionDefinition(Name)]
     public class ClusterCollection : ICollectionFixture<ClusterFixture>
     {
         public const string Name = "ClusterCollection";

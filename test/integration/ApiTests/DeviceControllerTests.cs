@@ -1,24 +1,23 @@
-using Api;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
 using Shouldly;
-using System.Threading.Tasks;
-using System.Net;
 using System;
+using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace ApiTests
+namespace Api.IntegrationTests
 {
-    public class OrealnsContollerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class DeviceControllerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
-        public OrealnsContollerTests(WebApplicationFactory<Startup> factory)
+        public DeviceControllerTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
-        
+
         [Fact]
         public async Task Ping_Should_Return_Count()
         {
@@ -77,7 +76,7 @@ namespace ApiTests
             eventsResponseAfterPing.StatusCode.ShouldBe(HttpStatusCode.OK);
             body = await eventsResponseAfterPing.Content.ReadAsStringAsync();
             body.ShouldBe("Online");
-            
+
 
         }
 
